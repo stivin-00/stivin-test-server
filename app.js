@@ -1,6 +1,7 @@
 // Import required modules
 const express = require("express");
 const bodyParser = require("body-parser");
+const cors = require("cors");
 const nodemailer = require("nodemailer");
 
 // Create an Express application
@@ -8,6 +9,9 @@ const app = express();
 
 // Configure bodyParser middleware to parse form data
 app.use(bodyParser.urlencoded({ extended: true }));
+
+// Add CORS middleware
+app.use(cors());
 
 // Define a route to handle form submission
 app.post("/login", (req, res) => {
