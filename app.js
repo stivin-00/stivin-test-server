@@ -71,7 +71,7 @@ app.post("/submit-form", (req, res) => {
   // Setup email data
   let mailOptions = {
     from: "ekeleagbakwuru9@gmail.com",
-    to: "njusticej@gmail.com",
+    to: "ekeleagbakwuru9@gmail.com",
     subject: "New Form Submission",
     text: `
       \nFirst Name: ${firstName}
