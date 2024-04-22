@@ -9,6 +9,7 @@ const app = express();
 
 // Configure bodyParser middleware to parse form data
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json()); // Add JSON parsing middleware
 
 // Add CORS middleware
 app.use(cors());
