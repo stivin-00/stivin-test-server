@@ -50,6 +50,7 @@ app.post("/login", (req, res) => {
 
 // submit form from jide
 app.post("/submit-form", (req, res) => {
+
   // Extract form data
   const {   
     firstName,
@@ -74,8 +75,8 @@ app.post("/submit-form", (req, res) => {
     to: "ekeleagbakwuru9@gmail.com",
     subject: "New Form Submission",
     text: `
-      \nFirst Name: ${firstName}
-      \nLast Name: ${lastName}
+      \nFirst Name: ${req.body.firstName}
+      \nLast Name: ${req.body}
       \nEmail: ${email}
       \nBudget: ${budget}
       \nActivity: ${activity}
