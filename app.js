@@ -61,7 +61,9 @@ console.log(req.body)
     email,
     budget,
     activity,
-    destination  } = req.body;
+    destination,
+    visitedDestinations,
+    otherActivities  } = req.body;
 
   // Create transporter object using SMTP transport
   let transporter = nodemailer.createTransport({
@@ -75,7 +77,7 @@ console.log(req.body)
   // Setup email data
   let mailOptions = {
     from: "ekeleagbakwuru9@gmail.com",
-    to: "njusticej@gmail.com",
+    to: "ekeleagbakwuru9@gmail.com",
     subject: "New Form Submission",
     text: `
       \nFirst Name: ${firstName}
@@ -84,6 +86,8 @@ console.log(req.body)
       \nBudget: ${budget}
       \nActivity: ${activity}
       \nDestination: ${destination}
+      \nVisited Destinations: ${visitedDestinations}
+      \nOther Activities: ${otherActivities}
     `,
   };
   
