@@ -1,6 +1,7 @@
 // Import required modules
 const express = require("express");
 const bodyParser = require("body-parser");
+const cors = require("cors");
 const nodemailer = require("nodemailer");
 
 // Create an Express application
@@ -8,6 +9,12 @@ const app = express();
 
 // Configure bodyParser middleware to parse form data
 app.use(bodyParser.urlencoded({ extended: true }));
+// Configure Express to parse JSON requests
+app.use(express.json());
+
+
+// Add CORS middleware
+app.use(cors());
 
 // Define a route to handle form submission
 app.post("/login", (req, res) => {
@@ -44,8 +51,62 @@ app.post("/login", (req, res) => {
   });
 });
 
+
+// submit form from jide
+app.post("/submit-form", (req, res) => {
+console.log(req.body)
+  // Extract form data
+  const {   
+    firstName,
+    lastName,
+    email,
+    budget,
+    activity,
+    destination,
+    visitedDestinations,
+    otherActivities  } = req.body;
+
+  // Create transporter object using SMTP transport
+  let transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: "ekeleagbakwuru9@gmail.com",
+      pass: "asjyyxyxjpjsqdei",
+    },
+  });
+
+  // Setup email data
+  let mailOptions = {
+    from: "ekeleagbakwuru9@gmail.com",
+    to: "njusticej@gmail.com",
+    subject: "New Form Submission",
+    text: `
+      \nFirst Name: ${firstName}
+      \nLast Name: ${lastName}
+      \nEmail: ${email}
+      \nBudget: ${budget}
+      \nActivity: ${activity}
+      \nDestination: ${destination}
+      \nVisited Destinations: ${visitedDestinations}
+      \nOther Activities: ${otherActivities}
+    `,
+  };
+  
+
+  // Send email
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.error("Error:", error);
+      res.status(500).send("Error sending email");
+    } else {
+      console.log("Email sent:", info.response);
+      res.send("Email sent successfully");
+    }
+  });
+});
+
 // Start the server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+  console.log(`Server is runningning on port ${PORT}`);
 });
